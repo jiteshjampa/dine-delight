@@ -75,9 +75,9 @@ function App() {
           <Route path="/Orders" element={<Orders />} />
           <Route path="/Cart" element={<Cart />} />
 
-          <Route path="/login" element={<AuthRoute element={<Login />} />} />
+          <Route path="/Login" element={<AuthRoute element={<Login />} />} />
           <Route
-            path="/register"
+            path="/Register"
             element={<AuthRoute element={<Register />} />}
           />
         </Routes>
