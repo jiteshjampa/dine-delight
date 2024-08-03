@@ -35,7 +35,7 @@ const Order = () => {
 
       fetchOrders();
     } else {
-      navigate("/login"); // Redirect to login if not authenticated
+      navigate("/Login"); // Redirect to login if not authenticated
     }
   }, [isAuthenticated, navigate]);
 
