@@ -1,4 +1,3 @@
-// components/App.js
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +15,7 @@ const Orders = lazy(() => import("./pages/Orders"));
 const Cart = lazy(() => import("./pages/Cart"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +23,6 @@ function App() {
   const navigate = useNavigate();
   const cartValue = useSelector((state) => state.cart.change);
   const { isAuthenticated, loading } = useSelector((state) => state.user);
-  const id = useSelector((state) => state.user.id);
 
   useEffect(() => {
     dispatch(checkAuthStatus());
@@ -89,6 +88,8 @@ function App() {
           {!isAuthenticated && (
             <Route path="/Register" element={<Register />} />
           )}
+          <Route path="*" element={<NotFound />} />{" "}
+          {/* Catch-all route for 404 */}
         </Routes>
       </Suspense>
     </div>
