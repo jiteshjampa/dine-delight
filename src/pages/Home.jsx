@@ -26,7 +26,7 @@ const Home = () => {
         bodyClassName: "custom-toast-body",
         autoClose: 3000,
       });
-      navigate("/login");
+      navigate("/Login");
       return;
     }
 
