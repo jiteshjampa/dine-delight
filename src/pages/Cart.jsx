@@ -38,7 +38,7 @@ const Cart = () => {
         bodyClassName: "custom-toast-body",
         autoClose: 3000,
       });
-      navigate("/login");
+      navigate("/Login");
     }
   }, [isAuthenticated]);
 
