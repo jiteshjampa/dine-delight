@@ -15,18 +15,9 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const loginData = { email, password };
-      const res = await axios.post(
-        "https://dine-delight-backend.vercel.app/api/login",
-        loginData,
-        {
-          withCredentials: true,
-        }
-      );
-
-      if (res.data.sucess) {
-        // Set authenticated status
-        toast.success("Login Successful!", {
+      const response = await axios.post('/api/login', { email, password });
+  if (response && response.data) {
+     toast.success("Login Successful!", {
           className: "custom-toast",
           bodyClassName: "custom-toast-body",
           autoClose: 2000,
@@ -34,11 +25,12 @@ const Login = () => {
             // Set user data
             dispatch(setAuthenticated(true));
             navigate("/");
-          },
-        });
-      }
-    } catch (error) {
-      console.error(error);
+  }
+     }
+                   }
+
+     catch (error) {
+      console.error('Login failed:', error.response?.data?.message || 'Server unreachable');
       setData(error.response.data);
     }
   };
