@@ -12,29 +12,32 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('/api/login', { email, password });
-  if (response && response.data) {
-     toast.success("Login Successful!", {
-          className: "custom-toast",
-          bodyClassName: "custom-toast-body",
-          autoClose: 2000,
-          onClose: () => {
-            // Set user data
-            dispatch(setAuthenticated(true));
-            navigate("/");
-  }
-     }
-                   }
+const handleLogin = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post(
+      "https://dine-delight-backend.vercel.app/api/login",
+      { email, password },
+      { withCredentials: true }
+    );
 
-     catch (error) {
-      console.error('Login failed:', error.response?.data?.message || 'Server unreachable');
-      setData(error.response.data);
+    if (res.data) {
+      toast.success("Login Successful!", {
+        className: "custom-toast",
+        bodyClassName: "custom-toast-body",
+        autoClose: 2000,
+        onClose: () => {
+          dispatch(setAuthenticated(true));
+          navigate("/");
+        },
+      });
     }
-  };
-
+  } catch (error) {
+    const message = error.response?.data?.message || "Login failed. Please try again.";
+    console.error("Login failed:", message);
+    toast.error(message, { className: "custom-toast", autoClose: 3000 });
+  }
+};
   return (
     <div className="flex flex-col md:flex-row text-orange-600  mt-24">
       {/* Image Section */}
